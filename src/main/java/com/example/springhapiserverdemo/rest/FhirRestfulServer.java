@@ -30,5 +30,8 @@ public class FhirRestfulServer extends RestfulServer {
         setResourceProviders(Collections.singletonList(applicationContext.getBean(PatientProvider.class)));
         CustomOpenApiInterceptor openApiInterceptor = new CustomOpenApiInterceptor();
         registerInterceptor(openApiInterceptor);
+        setImplementationDescription("DHM FHIR Server");
+        setServerName("DHM FHIR Server");
+        setServerVersion("FHIR R4");
     }
 }
