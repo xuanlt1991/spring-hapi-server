@@ -3,6 +3,7 @@ package com.example.springhapiserverdemo.rest;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.openapi.OpenApiInterceptor;
 import ca.uhn.fhir.rest.server.RestfulServer;
+import com.example.springhapiserverdemo.interceptor.CustomOpenApiInterceptor;
 import com.example.springhapiserverdemo.provider.PatientProvider;
 import org.springframework.context.ApplicationContext;
 
@@ -27,7 +28,7 @@ public class FhirRestfulServer extends RestfulServer {
         super.initialize();
         setFhirContext(FhirContext.forR4());
         setResourceProviders(Collections.singletonList(applicationContext.getBean(PatientProvider.class)));
-        OpenApiInterceptor openApiInterceptor = new OpenApiInterceptor();
+        CustomOpenApiInterceptor openApiInterceptor = new CustomOpenApiInterceptor();
         registerInterceptor(openApiInterceptor);
     }
 }
