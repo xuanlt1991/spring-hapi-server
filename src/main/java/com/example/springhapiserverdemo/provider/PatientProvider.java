@@ -96,6 +96,7 @@ public class PatientProvider implements IResourceProvider {
         patient.setBirthDate(new Date());
         DateType birthDate = patient.getBirthDateElement();
         birthDate.setValue(new Date());
+        birthDate.setId("birthDate Id");
         birthDate.addExtension(new Extension("http://hl7.org/fhir/StructureDefinition/patient-birthTime", new StringType("1974-12-25T14:35:45-05:00")));
         // Birth Date Extension
 

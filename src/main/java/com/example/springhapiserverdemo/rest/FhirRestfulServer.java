@@ -1,6 +1,7 @@
 package com.example.springhapiserverdemo.rest;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.openapi.OpenApiInterceptor;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import com.example.springhapiserverdemo.provider.PatientProvider;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import java.util.Arrays;
 import java.util.Collections;
 
-@WebServlet("/*")
+/*@WebServlet("/*")*/
+@WebServlet(urlPatterns = { "/fhir/*" }, displayName = "FHIR Server")
 public class FhirRestfulServer extends RestfulServer {
 
     private ApplicationContext applicationContext;
@@ -25,5 +27,7 @@ public class FhirRestfulServer extends RestfulServer {
         super.initialize();
         setFhirContext(FhirContext.forR4());
         setResourceProviders(Collections.singletonList(applicationContext.getBean(PatientProvider.class)));
+        OpenApiInterceptor openApiInterceptor = new OpenApiInterceptor();
+        registerInterceptor(openApiInterceptor);
     }
 }
